@@ -22,8 +22,9 @@ export const SignupForm = () => {
     e.preventDefault();
     if (form.password === form.password2) {
       console.log(form);
-      const { password2, ...formData } = form;
-      createUser(formData);
+      //const { password2, ...formData } = form;
+      delete form.password2;
+      createUser(form);
       setForm(initialForm);
       navigate("/login");
     } else {

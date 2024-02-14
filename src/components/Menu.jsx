@@ -67,22 +67,27 @@ export const Menu = () => {
               </NavLink>
             )}
           </div>
-          <div className="d-flex align-items-center mx-3">
-            <form className="d-flex align-items-center" onSubmit={handleSubmit}>
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Buscar titulo"
-                aria-label="Search"
-                name="q"
-                value={queryParam}
-                onChange={handleChange}
-              />
-              <button className="btn btn-outline-success" type="submit">
-                <i className="bi bi-search"></i>
-              </button>
-            </form>
-          </div>
+          {auth && (
+            <div className="d-flex align-items-center mx-3">
+              <form
+                className="d-flex align-items-center"
+                onSubmit={handleSubmit}
+              >
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Buscar titulo"
+                  aria-label="Search"
+                  name="q"
+                  value={queryParam}
+                  onChange={handleChange}
+                />
+                <button className="btn btn-outline-success" type="submit">
+                  <i className="bi bi-search"></i>
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     </nav>
