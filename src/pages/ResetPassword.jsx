@@ -18,7 +18,7 @@ const ResetPasswordForm = () => {
     console.log(token);
     try {
       const response = await fetch(
-        `https://fluchetti.pythonanywhere.com/users/reset_password/confirm/${uidb64}/${token}/"`,
+        `https://fluchetti.pythonanywhere.com/users/reset_password/confirm/${uidb64}/${token}/`,
         {
           method: "POST",
           headers: {
