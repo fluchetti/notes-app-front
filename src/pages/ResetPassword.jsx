@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ResetPasswordForm = () => {
   const { uid, token } = useParams();
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -15,7 +15,6 @@ const ResetPasswordForm = () => {
       return;
     }
 
-    alert("Cambiaste la contraseña");
     try {
       const response = await fetch(
         `https://fluchetti.pythonanywhere.com/users/reset_password/confirm/${uid}/${token}/"`,
@@ -33,6 +32,8 @@ const ResetPasswordForm = () => {
 
       if (!response.ok) {
         throw new Error("Error al restablecer la contraseña");
+      } else {
+        navigate("/");
       }
 
       // Manejar el éxito del restablecimiento de contraseña

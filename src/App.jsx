@@ -25,7 +25,7 @@ function App() {
               element={<RequestResetPassword></RequestResetPassword>}
             ></Route>
             <Route
-              path="/change_password"
+              path="/change_password/:uidb64/:token"
               element={<ResetPasswordForm></ResetPasswordForm>}
             ></Route>
             <Route path="/profile" element={<Profile></Profile>}></Route>
