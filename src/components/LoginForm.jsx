@@ -20,7 +20,7 @@ export const LoginForm = () => {
     if (!form.username || !form.password) {
       return;
     }
-    fetch("https://fluchetti.pythonanywhere.com/users/login/", {
+    fetch("http://127.0.0.1:8000/users/login/", {
       method: "POST",
       body: JSON.stringify(form),
       headers: { "Content-type": "application/json" },

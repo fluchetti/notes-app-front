@@ -25,7 +25,7 @@ export const CreateNoteForm = () => {
     e.preventDefault();
     // Si la nota viene con id es un PUT, si no es un POST.
     if (!newNote.id) {
-      fetch("https://fluchetti.pythonanywhere.com/notes/list/", {
+      fetch("http://127.0.0.1:8000/notes/list/", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -44,7 +44,7 @@ export const CreateNoteForm = () => {
           handleReset();
         });
     } else {
-      fetch(`https://fluchetti.pythonanywhere.com/notes/list/${newNote.id}`, {
+      fetch(`http://127.0.0.1:8000/notes/list/${newNote.id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

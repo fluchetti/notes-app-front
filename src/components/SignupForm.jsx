@@ -34,7 +34,7 @@ export const SignupForm = () => {
   };
 
   const createUser = (formData) => {
-    fetch("https://fluchetti.pythonanywhere.com/users/signup/", {
+    fetch("http://127.0.0.1:8000/users/signup/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

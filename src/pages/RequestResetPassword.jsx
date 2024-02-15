@@ -9,7 +9,7 @@ export const RequestResetPassword = () => {
     e.preventDefault();
     console.log(form);
     // Post a reset_password del backend.
-    fetch("https://fluchetti.pythonanywhere.com/users/request_password/", {
+    fetch("http://127.0.0.1:8000/users/request_password/", {
       method: "POST",
       body: JSON.stringify(form),
       headers: {

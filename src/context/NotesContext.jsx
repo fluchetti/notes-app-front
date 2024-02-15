@@ -10,7 +10,7 @@ const NotesProvider = ({ children }) => {
   const [dataToEdit, setDataToEdit] = useState(null);
   const [loading, setLoading] = useState(false);
   const { authToken } = useContext(AuthContext);
-  let baseURL = "https://fluchetti.pythonanywhere.com/";
+  let baseURL = "http://127.0.0.1:8000/";
 
   const deleteNote = ({ id }) => {
     console.log(id);
@@ -18,7 +18,7 @@ const NotesProvider = ({ children }) => {
     const confirm = window.confirm("Borrar nota?");
     if (confirm) {
       // hacer un delete a la api.
-      fetch(`https://fluchetti.pythonanywhere.com/notes/list/${id}`, {
+      fetch(`http://127.0.0.1:8000/notes/list/${id}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
