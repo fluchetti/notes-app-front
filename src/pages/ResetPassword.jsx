@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ResetPasswordForm = () => {
-  const { uid, token } = useParams();
+  const { uidb64, token } = useParams();
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -14,10 +14,11 @@ const ResetPasswordForm = () => {
       setErrorMessage("Las contraseñas no coinciden");
       return;
     }
-
+    console.log(uidb64);
+    console.log(token);
     try {
       const response = await fetch(
-        `https://fluchetti.pythonanywhere.com/users/reset_password/confirm/${uid}/${token}/"`,
+        `https://fluchetti.pythonanywhere.com/users/reset_password/confirm/${uidb64}/${token}/"`,
         {
           method: "POST",
           headers: {
