@@ -8,6 +8,7 @@ import { Signup } from "./pages/Signup";
 import { AuthProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
 import { RequestResetPassword } from "./pages/RequestResetPassword";
+import ResetPasswordForm from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
             <Route
               path="/reset"
               element={<RequestResetPassword></RequestResetPassword>}
+            ></Route>
+            <Route
+              path="/change_password"
+              element={<ResetPasswordForm></ResetPasswordForm>}
             ></Route>
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/*" element={<Error404></Error404>}></Route>

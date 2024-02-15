@@ -3,7 +3,6 @@ import AuthContext from "../context/AuthContext";
 
 export const RequestResetPassword = () => {
   const [form, setForm] = useState({ email: "" });
-  const { auth, authToken } = useContext(AuthContext);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
