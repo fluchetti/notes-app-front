@@ -9,30 +9,31 @@ const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState(initialNotes);
   const [dataToEdit, setDataToEdit] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [noteMessage, setNoteMessage] = useState(false);
   const { authToken } = useContext(AuthContext);
-  let baseURL = "https://fluchetti.pythonanywhere.com/";
+  let baseURL = "http://127.0.0.1:8000/";
 
   const deleteNote = ({ id }) => {
-    console.log(id);
-    console.log(authToken);
     const confirm = window.confirm("Borrar nota?");
     if (confirm) {
       // hacer un delete a la api.
-      fetch(`https://fluchetti.pythonanywhere.com/notes/list/${id}`, {
+      fetch(`http://127.0.0.1:8000/notes/list/${id}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${authToken}`,
         },
       }).then((res) => {
-        console.log(res);
         let newNotes = notes.filter((note) => note.id !== id);
-        console.log(newNotes);
         if (newNotes.length !== 0) {
           setNotes(newNotes);
         } else {
           setNotes([]);
         }
+        setNoteMessage("Nota eliminada exitosamente");
+        setTimeout(() => {
+          setNoteMessage(false);
+        }, 2000);
       });
     }
   };
@@ -52,6 +53,8 @@ const NotesProvider = ({ children }) => {
     deleteNote,
     editNote,
     baseURL,
+    noteMessage,
+    setNoteMessage,
   };
   return <NotesContext.Provider value={data}>{children}</NotesContext.Provider>;
 };

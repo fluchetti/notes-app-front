@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const initialForm = {
@@ -11,7 +11,7 @@ const initialForm = {
 
 export const SignupForm = () => {
   const [form, setForm] = useState(initialForm);
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState({ text: null, isError: false });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,20 +21,21 @@ export const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.password === form.password2) {
-      console.log(form);
-      //const { password2, ...formData } = form;
       delete form.password2;
       createUser(form);
       setForm(initialForm);
-      navigate("/login");
+      setTimeout(() => {
+        setMessage({ text: null, isError: false });
+        navigate("/login");
+      }, 3000);
     } else {
-      setMessage("Las contraseñas no coinciden");
+      setMessage({ text: "Las contraseñas no coinciden", isError: true });
       setForm({ ...form, password: "", password2: "" });
     }
   };
 
   const createUser = (formData) => {
-    fetch("https://fluchetti.pythonanywhere.com/users/signup/", {
+    fetch("http://127.0.0.1:8000/users/signup/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -49,7 +50,13 @@ export const SignupForm = () => {
           throw new Error("Ocurrio un error loko", res.statusText);
         }
       })
-      .then((json) => console.log(json))
+      .then((json) => {
+        console.log(json);
+        setMessage({
+          text: "Cuenta creada exitosamente. Estas siendo redirigido..",
+          isError: false,
+        });
+      })
       .catch((error) => {
         console.log("Ocurrio un error ", error);
       });
@@ -110,7 +117,15 @@ export const SignupForm = () => {
         className="btn btn-primary mx-2"
         onClick={handleSubmit}
       />
-      {message && <div className="alert alert-danger mt-3">{message}</div>}
+      {message.text && (
+        <div
+          className={`alert ${
+            message.isError ? "alert-danger" : "alert-success"
+          } mt-3 `}
+        >
+          {message.text}
+        </div>
+      )}
     </form>
   );
 };

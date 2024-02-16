@@ -8,8 +8,14 @@ const initialNote = {
 };
 
 export const CreateNoteForm = () => {
-  const { notes, setNotes, dataToEdit, setDataToEdit } =
-    useContext(NotesContext);
+  const {
+    notes,
+    setNotes,
+    dataToEdit,
+    setDataToEdit,
+    noteMessage,
+    setNoteMessage,
+  } = useContext(NotesContext);
   const { authToken } = useContext(AuthContext);
   const [newNote, setNewNote] = useState(initialNote);
 
@@ -25,7 +31,7 @@ export const CreateNoteForm = () => {
     e.preventDefault();
     // Si la nota viene con id es un PUT, si no es un POST.
     if (!newNote.id) {
-      fetch("https://fluchetti.pythonanywhere.com/notes/list/", {
+      fetch("http://127.0.0.1:8000/notes/list/", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -40,11 +46,15 @@ export const CreateNoteForm = () => {
           }
         })
         .then((json) => {
+          setNoteMessage("Nota creada exitosamente");
           setNotes([json, ...notes]);
           handleReset();
+          setTimeout(() => {
+            setNoteMessage(false);
+          }, 2000);
         });
     } else {
-      fetch(`https://fluchetti.pythonanywhere.com/notes/list/${newNote.id}`, {
+      fetch(`http://127.0.0.1:8000/notes/list/${newNote.id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -62,6 +72,12 @@ export const CreateNoteForm = () => {
           const newNotes = notes.filter((note) => note.id !== json.id);
           setNotes([json, ...newNotes]);
           handleReset();
+          setNoteMessage("Nota editada exitosamente");
+          setNotes([json, ...notes]);
+          handleReset();
+          setTimeout(() => {
+            setNoteMessage(false);
+          }, 2000);
         });
     }
   };
@@ -110,6 +126,11 @@ export const CreateNoteForm = () => {
         <button className="btn btn-dark mt-2 mx-2" onClick={handleReset}>
           Limpiar
         </button>
+        {noteMessage && (
+          <div className="alert alert-success mt-3 text-center" role="alert">
+            {noteMessage}
+          </div>
+        )}
       </form>
     </div>
   );

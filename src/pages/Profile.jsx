@@ -7,7 +7,7 @@ export const Profile = () => {
   useEffect(() => {
     if (auth) {
       console.log("authhhh");
-      fetch("https://fluchetti.pythonanywhere.com/users/detail", {
+      fetch("http://127.0.0.1:8000/users/detail", {
         method: "GET",
         headers: {
           "Content-type": "application/json",

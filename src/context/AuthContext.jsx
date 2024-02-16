@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     const confirm = window.confirm("Estas seguro que queres cerrar sesion?");
     if (confirm) {
-      fetch("https://fluchetti.pythonanywhere.com/users/logout/", {
+      fetch("http://127.0.0.1:8000/users/logout/", {
         method: "POST",
         headers: {
           "Content-type": "text/plain",

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Note from "./Note";
 import NotesContext from "../context/NotesContext";
 import AuthContext from "../context/AuthContext";
@@ -8,7 +8,6 @@ export const Notes = () => {
   const { notes, setNotes, loading, setLoading } = useContext(NotesContext);
   const { authToken } = useContext(AuthContext);
   const [searchParams] = useSearchParams();
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -18,8 +17,8 @@ export const Notes = () => {
       try {
         if (authToken !== null) {
           const url = query
-            ? `https://fluchetti.pythonanywhere.com/notes/list/?q=${query}`
-            : "https://fluchetti.pythonanywhere.com/notes/list/";
+            ? `http://127.0.0.1:8000/notes/list/?q=${query}`
+            : "http://127.0.0.1:8000/notes/list/";
 
           const res = await fetch(url, {
             headers: {
@@ -29,10 +28,7 @@ export const Notes = () => {
           });
           if (res.ok) {
             const json = await res.json();
-            if (json.length > 0) {
-              setNotes(json);
-              console.log("SETEE NOTES A ", json);
-            }
+            setNotes(json);
           } else {
             throw new Error("Ocurrio un error", res.status, res.statusText);
           }
