@@ -9,7 +9,6 @@ const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(initialAuth);
 
   useEffect(() => {
-    console.log("Se renderizo la App");
     const token = localStorage.getItem("Token");
     if (token !== null) {
       setAuthToken(token);
@@ -22,7 +21,7 @@ const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     const confirm = window.confirm("Estas seguro que queres cerrar sesion?");
     if (confirm) {
-      fetch("http://127.0.0.1:8000/users/logout/", {
+      fetch("https://fluchetti.pythonanywhere.com/users/logout/", {
         method: "POST",
         headers: {
           "Content-type": "text/plain",

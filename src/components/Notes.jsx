@@ -17,8 +17,8 @@ export const Notes = () => {
       try {
         if (authToken !== null) {
           const url = query
-            ? `http://127.0.0.1:8000/notes/list/?q=${query}`
-            : "http://127.0.0.1:8000/notes/list/";
+            ? `https://fluchetti.pythonanywhere.com/notes/list/?q=${query}`
+            : "https://fluchetti.pythonanywhere.com/notes/list/";
 
           const res = await fetch(url, {
             headers: {

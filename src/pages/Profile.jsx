@@ -6,8 +6,7 @@ export const Profile = () => {
   const [profileData, setProfileData] = useState(null);
   useEffect(() => {
     if (auth) {
-      console.log("authhhh");
-      fetch("http://127.0.0.1:8000/users/detail", {
+      fetch("https://fluchetti.pythonanywhere.com/users/detail", {
         method: "GET",
         headers: {
           "Content-type": "application/json",

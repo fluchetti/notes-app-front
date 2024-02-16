@@ -17,7 +17,7 @@ const NotesProvider = ({ children }) => {
     const confirm = window.confirm("Borrar nota?");
     if (confirm) {
       // hacer un delete a la api.
-      fetch(`http://127.0.0.1:8000/notes/list/${id}`, {
+      fetch(`https://fluchetti.pythonanywhere.com/notes/list/${id}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
