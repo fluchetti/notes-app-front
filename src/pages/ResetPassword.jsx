@@ -5,13 +5,13 @@ const ResetPasswordForm = () => {
   const { uidb64, token } = useParams();
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState({ text: null, isError: false });
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (newPassword !== confirmNewPassword) {
-      setErrorMessage("Las contraseñas no coinciden");
+      setMessage({ text: "Las contraseñas no coinciden", isError: true });
       return;
     }
     console.log(uidb64);
@@ -32,39 +32,71 @@ const ResetPasswordForm = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Error al restablecer la contraseña");
+        setMessage({
+          text: "Error al restablecer la contraseña",
+          isError: true,
+        });
       } else {
-        navigate("/");
+        setMessage({
+          text: "Contraseña cambiada exitosamente. Estas siendo redirigido",
+          isError: false,
+        });
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
       }
-
-      // Manejar el éxito del restablecimiento de contraseña
-      // Redirigir a una página de éxito o mostrar un mensaje al usuario
     } catch (error) {
-      setErrorMessage("Error al restablecer la contraseña");
+      setMessage({
+        text: "Error al restablecer la contraseña",
+        isError: true,
+      });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="newPassword">Nueva contraseña:</label>
-      <input
-        type="password"
-        id="newPassword"
-        value={newPassword}
-        onChange={(event) => setNewPassword(event.target.value)}
-        required
-      />
-      <label htmlFor="confirmNewPassword">Confirmar nueva contraseña:</label>
-      <input
-        type="password"
-        id="confirmNewPassword"
-        value={confirmNewPassword}
-        onChange={(event) => setConfirmNewPassword(event.target.value)}
-        required
-      />
-      {errorMessage && <div>{errorMessage}</div>}
-      <button type="submit">Restablecer contraseña</button>
-    </form>
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <form onSubmit={handleSubmit} className="text-center p-4 border rounded">
+        <h2 className="mb-4">Restablecer Contraseña</h2>
+        <div className="mb-3">
+          <label htmlFor="newPassword" className="form-label">
+            Nueva contraseña:
+          </label>
+          <input
+            type="password"
+            id="newPassword"
+            value={newPassword}
+            onChange={(event) => setNewPassword(event.target.value)}
+            className="form-control"
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="confirmNewPassword" className="form-label">
+            Confirmar nueva contraseña:
+          </label>
+          <input
+            type="password"
+            id="confirmNewPassword"
+            value={confirmNewPassword}
+            onChange={(event) => setConfirmNewPassword(event.target.value)}
+            className="form-control"
+            required
+          />
+        </div>
+        {message.text && (
+          <div
+            className={`alert mt-3 ${
+              message.isError ? "alert-danger" : "alert-success"
+            }`}
+          >
+            <p>{message.text}</p>
+          </div>
+        )}
+        <button type="submit" className="btn btn-primary mt-3">
+          Restablecer contraseña
+        </button>
+      </form>
+    </div>
   );
 };
 
