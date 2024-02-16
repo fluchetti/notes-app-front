@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { auth, setAuth, authToken, setAuthToken } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   useEffect(() => {
     console.log("EN EL USEEFECT DE LOGIN PAGE");
     console.log(auth);

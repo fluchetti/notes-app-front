@@ -8,7 +8,7 @@ export const RequestResetPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    // Post a reset_password del backend.
+    // Post a reset_password del backend para que mande mail de reseteo.
     fetch("https://fluchetti.pythonanywhere.com/users/request_password/", {
       method: "POST",
       body: JSON.stringify(form),
