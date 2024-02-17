@@ -10,7 +10,6 @@ export const RequestResetPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     // Post a reset_password del backend para que mande mail de reseteo.
     fetch("https://fluchetti.pythonanywhere.com/users/request_password/", {
       method: "POST",
@@ -38,14 +37,12 @@ export const RequestResetPassword = () => {
         }
       })
       .catch((error) => {
-        console.error("Error:", error);
         setMessage({
           text: "Ocurrió un error al procesar la solicitud. Por favor, inténtalo nuevamente más tarde.",
           isError: true,
         });
       });
 
-    // Limpiar el campo de email después de enviar el formulario
     setForm({ email: "" });
   };
 

@@ -40,7 +40,6 @@ export const CreateNoteForm = () => {
         body: JSON.stringify(newNote),
       })
         .then((res) => {
-          console.log(res);
           if (res.ok) {
             return res.json();
           }
@@ -63,7 +62,6 @@ export const CreateNoteForm = () => {
         body: JSON.stringify(newNote),
       })
         .then((res) => {
-          console.log(res);
           if (res.ok) {
             return res.json();
           }

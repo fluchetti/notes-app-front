@@ -43,7 +43,6 @@ export const SignupForm = () => {
       body: JSON.stringify(formData),
     })
       .then((res) => {
-        console.log(res);
         if (res.ok) {
           return res.json();
         } else {
@@ -51,7 +50,6 @@ export const SignupForm = () => {
         }
       })
       .then((json) => {
-        console.log(json);
         setMessage({
           text: "Cuenta creada exitosamente. Estas siendo redirigido..",
           isError: false,

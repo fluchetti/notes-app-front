@@ -14,8 +14,6 @@ const ResetPasswordForm = () => {
       setMessage({ text: "Las contraseñas no coinciden", isError: true });
       return;
     }
-    console.log(uidb64);
-    console.log(token);
     try {
       const response = await fetch(
         `https://fluchetti.pythonanywhere.com/users/reset_password/confirm/${uidb64}/${token}/`,

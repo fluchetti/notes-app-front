@@ -13,8 +13,6 @@ const AuthProvider = ({ children }) => {
     if (token !== null) {
       setAuthToken(token);
       setAuth(true);
-    } else {
-      console.log("token nulo");
     }
   }, []);
 
@@ -28,15 +26,10 @@ const AuthProvider = ({ children }) => {
           Authorization: `Token ${authToken}`,
         },
       }).then((res) => {
-        console.log(res);
         if (res.ok) {
-          console.log("Deslogeado con exito");
           localStorage.removeItem("Token");
           window.location.reload();
           return res.statusText;
-        } else {
-          console.log("Error al deslogear..");
-          console.log(res.statusText);
         }
       });
     }
