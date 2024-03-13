@@ -6,8 +6,8 @@
 
 Inicia sesión en la aplicación con las siguientes credenciales:
 
-- **Email:** admin@admin.com
-- **Contraseña:** admin
+- **Email:** test@test.com
+- **Contraseña:** contrasenia
 
 O crea tu propia cuenta (no requiere validación).
 
